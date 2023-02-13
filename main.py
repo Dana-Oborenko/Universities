@@ -1,16 +1,13 @@
 import requests
 
-response = requests.get("https://raw.githubusercontent.com/Hipo/university-domains-list/master/world_universities_and_domains.json")
+def myFunc(e):
+    return e["name"]
+
+response = requests.get("http://universities.hipolabs.com/search?country=latvia")
 
 data = response.json()
 
-latvijas_universitates = []
+data.sort(key=myFunc)
 
-for uni in data:
-    if uni["alpha_two_code"] == "LV":
-        latvijas_universitates.append(uni)
-
-# print(latvijas_universitates)
-
-for i in latvijas_universitates:
-    print(i["name"])
+for i in range(0, len(data), 2):
+    print(data[i]["name"])
